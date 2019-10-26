@@ -1,9 +1,11 @@
+const postCSSLoader = require('../shared/postcss-loader');
+
 const cssLoader = {
     test: /\.css$/,
     use: [
         {
             // creates style nodes from JS strings
-            loader: "style-loader",
+            loader: 'style-loader',
             options: {
                 sourceMap: true
             }
@@ -15,16 +17,7 @@ const cssLoader = {
                 sourceMap: true
             }
         },
-        // {
-        //     loader: 'postcss-loader',
-        //     options: {
-        //         parser: 'sugarss', exec: true,
-        //         config: {
-        //             path: __dirname + './postcss.config.js'
-        //         }
-        //     }
-        // }
+        postCSSLoader,
     ]
 };
-
 module.exports = cssLoader;

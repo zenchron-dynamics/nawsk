@@ -1,3 +1,5 @@
+const postCSSLoader = require('../shared/postcss-loader');
+
 const sassLoader = {
     test: /\.scss$/,
     use: [
@@ -10,6 +12,7 @@ const sassLoader = {
                 sourceMap: true,
             }
         },
+        postCSSLoader,
         // Compiles Sass to CSS
         {
             loader: 'sass-loader',
@@ -18,7 +21,7 @@ const sassLoader = {
                 implementation: require('sass'),
                 sourceMap: true,
             },
-        }
+        },
     ]
 };
 module.exports = sassLoader;

@@ -1,27 +1,32 @@
 'use strict';
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHardiskPlugin = require('html-webpack-harddisk-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
 const LinkTypePlugin = require('html-webpack-link-type-plugin').HtmlWebpackLinkTypePlugin;
 
 const { getEntries } = require('./utilities/file-loader');
+const entries = getEntries('./src/views/', 'html');
 
 const logoPath = path.resolve(__dirname, '../src/assets/logo.png');
 
 const config = {
   mode: 'none',
-  entry: Object.assign({ entries, index: './src/javascript/index.js' }),
+  entry: Object.assign(entries, {
+    index: './src/javascript/index.js'
+  }),
   module: {
     rules: [
       {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader'
+        loader: 'eslint-loader',
+        options: {
+          fix: true,
+          emitError: true
+        }
       },
       {
         test: /\.m?js$/,
@@ -29,7 +34,8 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            configFile: path.resolve(__dirname, '../babel.config.js'),
+            cacheDirectory: true
           }
         }
       }
@@ -37,7 +43,7 @@ const config = {
   },
   plugins: [
     new StyleLintPlugin({
-      configFile: path.resolve(__dirname, 'stylelint.config.js'),
+      configFile: path.resolve(__dirname, '../stylelint.config.js'),
       context: path.resolve(__dirname, '../src'),
       // files: '**/*.css',
       failOnError: false,
@@ -45,7 +51,6 @@ const config = {
     })
   ]
 };
-
 const pages = getEntries('./src/views/', 'html');
 
 for (const pathName in pages) {
@@ -79,26 +84,7 @@ config.plugins.push(
     outputPath: path.resolve(__dirname, '../dist')
   }),
   new FaviconsWebpackPlugin(logoPath), // svg works too!
-  new CspHtmlWebpackPlugin(
-    {
-      'base-uri': "'self'",
-      'object-src': "'none'",
-      'script-src': ["'unsafe-inline'", "'self'", "'unsafe-eval'"],
-      'style-src': ["'unsafe-inline'", "'self'", "'unsafe-eval'"]
-    },
-    {
-      enabled: true,
-      hashingMethod: 'sha256',
-      hashEnabled: {
-        'script-src': true,
-        'style-src': true
-      },
-      nonceEnabled: {
-        'script-src': true,
-        'style-src': true
-      }
-    }
-  ),
   new LinkTypePlugin()
 );
+
 module.exports = config;
