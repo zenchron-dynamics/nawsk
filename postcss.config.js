@@ -3,7 +3,7 @@ module.exports = {
     plugins: {
         'postcss-cssnext': {},
         'autoprefixer': {},
-        'postcss-browser-report': {},
+        'postcss-browser-reporter': {},
         'postcss-reporter': {}
     }
 };

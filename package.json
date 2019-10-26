@@ -16,6 +16,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "bluebird": "^3.7.0",
+    "chalk": "^2.4.2",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "cssnano": "^4.1.10",
@@ -33,12 +34,14 @@
     "favicons-webpack-plugin": "^1.0.2",
     "fibers": "^4.0.1",
     "file-loader": "^4.2.0",
+    "ftp-deploy": "^2.3.5",
     "glob": "^7.1.4",
     "html-loader": "^0.5.5",
     "html-webpack-harddisk-plugin": "^1.0.1",
     "html-webpack-link-type-plugin": "^1.0.3",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "minimist": "^1.2.0",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss": "^7.0.21",
@@ -70,7 +73,8 @@
     "start:dev": "webpack-dashboard yarn run start:live ",
     "start:live": "webpack-dev-server -d --mode development --colors --config ./config/webpack.dev.js",
     "lint": "eslint src/**.js src/**/**.js; exit 0",
-    "lint-fix": "eslint src/**.js src/**/**.js --fix; exit 0"
+    "lint-fix": "eslint src/**.js src/**/**.js --fix; exit 0",
+    "deploy:stage": "tools/ftp-deploy.js --mode stage --config ./stage.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3"
