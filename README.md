@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/bogdaniel/nawsk/badge/master)](https://www.codefactor.io/repository/github/bogdaniel/nawsk/overview/master)
+
 ### The 7–1 Pattern
 
 ```

@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const postCSSLoader = require('../shared/postcss-loader');
+const sass = require('sass');
 
 const sassLoader = {
     test: /\.scss$/,
@@ -24,7 +25,7 @@ const sassLoader = {
             loader: 'sass-loader',
             options: {
                 // Prefer `dart-sass`
-                implementation: require('sass'),
+                implementation: sass,
                 sourceMap: false
             }
         }
