@@ -48,6 +48,7 @@
     "postcss-browser-reporter": "^0.6.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0",
+    "postcss-placehold": "^1.2.0",
     "postcss-preset-env": "^6.7.0",
     "postcss-reporter": "^6.0.1",
     "prettier": "^1.18.2",
@@ -70,11 +71,12 @@
   "scripts": {
     "build:dev": "webpack --display-error-details -d --mode development --config ./config/webpack.dev.js",
     "build:prod": "webpack --display-error-details -p --mode production --config ./config/webpack.prod.js",
-    "start:dev": "webpack-dashboard yarn run start:live ",
+    "start:dev": "webpack-dashboard yarn run start:live",
     "start:live": "webpack-dev-server -d --mode development --colors --config ./config/webpack.dev.js",
     "lint": "eslint src/**.js src/**/**.js; exit 0",
     "lint-fix": "eslint src/**.js src/**/**.js --fix; exit 0",
-    "deploy:stage": "tools/ftp-deploy.js --mode stage --config ./stage.config.js"
+    "deploy:stage": "tools/ftp-deploy.js --mode stage --config ./stage.config.js",
+    "deploy:production": "tools/ftp-deploy.js --mode production --config ./production.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3"

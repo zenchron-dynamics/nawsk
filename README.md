@@ -88,3 +88,22 @@ files themselves, isn’t generally a good idea.
 ```
 
 The sass folder structure is copied from https://github.com/HugoGiraudel/sass-boilerplate the original author Hugo Giraudel
+
+
+
+If you would like to use an image placeholder you can check out the documentation here https://github.com/awayken/postcss-placehold
+
+### Example
+```
+h1 {
+    background: placehold(400, 400);
+}
+```
+
+### Output
+```
+h1 {
+    background: url("https://placehold.it/400x400");
+}
+
+```
