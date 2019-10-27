@@ -1,15 +1,14 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const baseConfig = require('./webpack.common');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpackMerge = require('webpack-merge');
+const baseConfig = require('./webpack.common');
 
 const sassLoader = require('./loaders/production/sass-loader');
 const cssLoader = require('./loaders/development/css-loader');
@@ -18,9 +17,7 @@ const imageLoader = require('./loaders/development/image-loader');
 const fontLoader = require('./loaders/development/font-loader');
 const htmlLoader = require('./loaders/shared/html-loader');
 
-const { getEntries } = require('./utilities/file-loader');
-
-const webpackMerge = require('webpack-merge');
+const {getEntries} = require('./utilities/file-loader');
 
 const publicPath = '/';
 
@@ -33,7 +30,7 @@ const config = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name]-[contenthash:8].js',
     chunkFilename: '[name]-[contenthash:8].js',
-    publicPath: publicPath
+    publicPath,
   },
   optimization: {
     minimizer: [
@@ -50,9 +47,9 @@ const config = {
         cssProcessorOptions: {},
         // The plugin options passed to the cssProcessor, defaults to {}
         cssProcessorPluginOptions: {
-          preset: ['default', { discardComments: { removeAll: true } }]
+          preset: ['default', {discardComments: {removeAll: true}}],
         },
-        canPrint: true // A boolean indicating if the plugin can print messages to the console, defaults to true
+        canPrint: true, // A boolean indicating if the plugin can print messages to the console, defaults to true
       }),
       new UglifyJsPlugin({
         test: /\.js(\?.*)?$/i,
@@ -60,10 +57,10 @@ const config = {
         cache: true,
         uglifyOptions: {
           output: {
-            comments: false
-          }
-        }
-      })
+            comments: false,
+          },
+        },
+      }),
     ],
     runtimeChunk: 'single',
     mergeDuplicateChunks: true,
@@ -82,7 +79,7 @@ const config = {
           chunks: 'all',
           minChunks: 2,
           minSize: 0,
-          enforce: true
+          enforce: true,
         },
         styles: {
           name: 'styles',
@@ -90,7 +87,7 @@ const config = {
           chunks: 'all',
           minChunks: 2,
           minSize: 0,
-          enforce: true
+          enforce: true,
         },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
@@ -98,20 +95,29 @@ const config = {
           name(module) {
             // get the name. E.g. node_modules/packageName/not/this/part.js
             // or node_modules/packageName
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+            )[1];
 
             // npm package names are URL-safe, but some servers don't like @ symbols
             return `npm.${packageName.replace('@', '')}`;
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   module: {
-    rules: [sassLoader, cssLoader, fileLoader, imageLoader, fontLoader, htmlLoader]
+    rules: [
+      sassLoader,
+      cssLoader,
+      fileLoader,
+      imageLoader,
+      fontLoader,
+      htmlLoader,
+    ],
   },
   plugins: [
     /**
@@ -129,16 +135,19 @@ const config = {
     new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
-      chunkFilename: 'css/[name].[hash].css'
+      chunkFilename: 'css/[name].[hash].css',
     }),
-    new BundleAnalyzerPlugin()
-  ]
+    new BundleAnalyzerPlugin(),
+  ],
 };
 const pages = getEntries('./src/views/', 'js');
 
 for (const pathname in pages) {
   // Configured to generate the html file, define paths, etc.
-  config.entry[pathname] = path.resolve(__dirname, '../src/views/' + `${pathname}.js`);
+  config.entry[pathname] = path.resolve(
+    __dirname,
+    '../src/views/' + `${pathname}.js`,
+  );
 }
 const buildConfig = webpackMerge(baseConfig, config);
 
