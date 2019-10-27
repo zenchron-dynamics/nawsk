@@ -3,8 +3,8 @@ const htmlLoader = {
   use: {
     loader: 'html-loader',
     options: {
-      attrs: [':data-src']
-    }
-  }
+      attrs: [':data-src'],
+    },
+  },
 };
 module.exports = htmlLoader;

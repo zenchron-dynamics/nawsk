@@ -19,14 +19,14 @@ const config = {
     liveReload: true,
     hot: true,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
     },
     watchOptions: {
-      poll: 1000
+      poll: 1000,
     },
     stats: {
-      children: true
-    }
+      children: true,
+    },
   },
   // devServer: {
   //   publicPath: path.join(__dirname, '../src/views'),
@@ -55,15 +55,22 @@ const config = {
         vendor: {
           test: /[\\\/]node_modules[\\\/]/,
           name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
+          chunks: 'all',
+        },
+      },
+    },
   },
   module: {
-    rules: [htmlLoader, cssLoader, sassLoader, imageLoader, fileLoader, fontLoader]
+    rules: [
+      htmlLoader,
+      cssLoader,
+      sassLoader,
+      imageLoader,
+      fileLoader,
+      fontLoader,
+    ],
   },
-  plugins: [new DashboardPlugin()]
+  plugins: [new DashboardPlugin()],
 };
 
 // Let's merge the commons with dev config
