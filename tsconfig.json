@@ -1,0 +1,33 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "sourceMap": true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit": true,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "dist",
+    // Target latest version of ECMAScript.
+    "target": "es2015",
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Process & infer types from .js files.
+    "allowJs": true,
+    "checkJs": true,
+    // Enable strictest settings like strictNullChecks & noImplicitAny.
+    "alwaysStrict": true,
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": false,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "strict": true
+  }
+}
