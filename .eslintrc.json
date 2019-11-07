@@ -32,6 +32,19 @@
     "html"
   ],
   "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    },
     "react": {
       "version": "999.999.999"
     }

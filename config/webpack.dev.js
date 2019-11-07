@@ -1,3 +1,4 @@
+const path = require('path');
 const webpackMerge = require('webpack-merge');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
@@ -16,6 +17,7 @@ const config = {
   devtool: 'inline-source-map',
   devServer: {
     watchContentBase: true,
+    contentBase: path.join(__dirname, '../src'),
     liveReload: true,
     hot: true,
     headers: {
