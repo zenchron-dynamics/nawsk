@@ -3,7 +3,7 @@ const htmlLoader = {
   use: {
     loader: 'html-loader',
     options: {
-      attrs: [':data-src'],
+      attributes: true
     },
   },
 };
