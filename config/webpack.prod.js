@@ -1,15 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpackMerge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const baseConfig = require('./webpack.common');
-
 const sassLoader = require('./loaders/production/sass-loader');
 const cssLoader = require('./loaders/development/css-loader');
 const fileLoader = require('./loaders/development/file-loader');
@@ -24,7 +21,7 @@ const publicPath = '/';
 const config = {
   mode: 'production',
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'none',
   entry: {},
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -149,6 +146,6 @@ for (const pathname in pages) {
     '../src/views/' + `${pathname}.js`,
   );
 }
-const buildConfig = webpackMerge(baseConfig, config);
+const buildConfig = merge(baseConfig, config);
 
 module.exports = buildConfig;

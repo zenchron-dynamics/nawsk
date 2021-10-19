@@ -1,9 +1,7 @@
 const path = require('path');
-const webpackMerge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-
 const commonConfig = require('./webpack.common');
-
 const cssLoader = require('./loaders/development/css-loader');
 const sassLoader = require('./loaders/development/sass-loader');
 const fileLoader = require('./loaders/development/file-loader');
@@ -14,20 +12,27 @@ const htmlLoader = require('./loaders/shared/html-loader');
 const config = {
   mode: 'development',
   target: 'web',
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
+  stats: {
+    children: true,
+  },
+  watchOptions: {
+    poll: 1000,
+  },
   devServer: {
-    watchContentBase: true,
-    contentBase: path.join(__dirname, '../src'),
+    static: {
+      directory: path.join(__dirname, '../src'),
+    },
     liveReload: true,
     hot: true,
+    compress: true,
+    client: {
+      logging: 'verbose',
+      overlay: true,
+      progress: true,
+    },
     headers: {
       'Access-Control-Allow-Origin': '*',
-    },
-    watchOptions: {
-      poll: 1000,
-    },
-    stats: {
-      children: true,
     },
   },
   // devServer: {
@@ -76,6 +81,6 @@ const config = {
 };
 
 // Let's merge the commons with dev config
-const buildConfig = webpackMerge(commonConfig, config);
+const buildConfig = merge(commonConfig, config);
 
 module.exports = buildConfig;
