@@ -58,7 +58,7 @@
     "postcss-reporter": "^7.0.4",
     "prettier": "^2.4.1",
     "responsive-loader": "^2.3.0",
-    "sass": "^1.43.2",
+    "sass": "^1.50.1",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
     "stylelint": "^13.13.1",
