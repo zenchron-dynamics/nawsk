@@ -41,7 +41,7 @@
     "file-loader": "^6.2.0",
     "ftp-deploy": "^2.4.1",
     "glob": "^7.2.0",
-    "html-loader": "^2.1.2",
+    "html-loader": "^4.2.0",
     "html-webpack-harddisk-plugin": "^2.0.0",
     "html-webpack-link-type-plugin": "^1.1.1",
     "html-webpack-plugin": "^5.4.0",
